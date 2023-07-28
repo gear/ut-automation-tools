@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from time import sleep
-from argsparse import ArgumentParser
+from argparse import ArgumentParser
 
 
 parser = ArgumentParser()
@@ -27,11 +27,10 @@ if __name__ == "__main__":
     in_button = web.find_element(By.NAME, 'syussya')
     out_button = web.find_element(By.NAME, 'taisya')
 
-    uname.send_keys(args.username)
-    passw.send_keys(args.password)
+    uname.send_keys(str(args.username))
+    passw.send_keys(str(args.password))
 
     if args.mode == 'in':
-        in_button.click()
+        web.execute_script("arguments[0].click();", in_button)
     else:
-        out_button.click()
-
+        web.execute_script("arguments[0].click();", out_button)

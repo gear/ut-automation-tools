@@ -18,6 +18,7 @@ if __name__ == "__main__":
         "23-08-15"
     ])
     today = datetime.now().strftime("%y-%m-%d")
+    time = datetime.now()
     assert today not in holidays, 'holiday'
     args = parser.parse_args()
     options = Options()
@@ -39,7 +40,7 @@ if __name__ == "__main__":
 
     if args.mode == 'in':
         web.execute_script("arguments[0].click();", in_button)
-        print(f'logged in {today}')
+        print(f'logged in {today} at {time.hour}:{time.minute}')
     else:
         web.execute_script("arguments[0].click();", out_button)
-        print(f'logged out {today}')
+        print(f'logged out {today} at {time.hour}:{time.minute}')

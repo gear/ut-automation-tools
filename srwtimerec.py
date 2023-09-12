@@ -15,7 +15,8 @@ if __name__ == "__main__":
     holidays = set([
         "23-08-11",
         "23-08-14",
-        "23-08-15"
+        "23-08-15",
+        "23-09-18"
     ])
     today = datetime.now().strftime("%y-%m-%d")
     time = datetime.now()
@@ -27,7 +28,12 @@ if __name__ == "__main__":
     web = webdriver.Chrome(options=options)
 
     web.get("https://ut-ppsweb.adm.u-tokyo.ac.jp/cws/srwtimerec")
-    sleep(5)
+    sleep(10)
+    # Try again once
+    if web.title != 'WEB打刻':
+        sleep(20)
+        web.get("https://ut-ppsweb.adm.u-tokyo.ac.jp/cws/srwtimerec")
+        sleep(10)
     assert web.title == 'WEB打刻', 'Cannot fetch website'
 
     uname = web.find_element(By.NAME, 'user_id')
